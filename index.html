@@ -69,8 +69,8 @@
     }
   </style>
 </head>
-<body class="dark-mode">
-  <button class="toggle-btn" onclick="toggleTheme()">☀️ Light Mode</button>
+<body>
+  <button class="toggle-btn" onclick="toggleTheme()">🌙 Dark Mode</button>
 
   <h1>👋 Hello, World! <span class="emoji">🌍</span></h1>
   <p>I'm <strong>Jyoti</strong> – a passionate <span class="emoji">💻 Software Engineer</span> who loves building <span class="emoji">⚙️ scalable microservices</span> and exploring <span class="emoji">☁️ cloud-native architectures</span>.</p>
@@ -81,18 +81,37 @@
   </footer>
 
   <script>
+    function applyThemeBasedOnTime() {
+      const hour = new Date().getHours();
+      const body = document.body;
+      const btn = document.querySelector('.toggle-btn');
+
+      if (hour >= 19 || hour < 6) {
+        // Night time: 7 PM to 6 AM
+        body.classList.add('dark-mode');
+        btn.textContent = '☀️ Light Mode';
+      } else {
+        // Day time
+        body.classList.add('light-mode');
+        btn.textContent = '🌙 Dark Mode';
+      }
+    }
+
     function toggleTheme() {
       const body = document.body;
       const btn = document.querySelector('.toggle-btn');
 
       if (body.classList.contains('dark-mode')) {
         body.classList.replace('dark-mode', 'light-mode');
-        btn.textContent = '🌙 ';
+        btn.textContent = '🌙 Dark Mode';
       } else {
         body.classList.replace('light-mode', 'dark-mode');
-        btn.textContent = '☀️ ';
+        btn.textContent = '☀️ Light Mode';
       }
     }
+
+    // Apply theme on page load
+    applyThemeBasedOnTime();
   </script>
 </body>
 </html>
